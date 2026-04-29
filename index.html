@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {margin:0;font-family:Arial;background:#f5f5f5;}
+    header {
+      background:#000;color:#fff;text-align:center;
+      padding:15px;font-size:22px;
+    }
+    .container {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:15px;padding:20px;
+    }
+    .card {
+      background:#fff;border-radius:10px;padding:10px;
+      text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card img {width:100%;border-radius:10px;}
+    .price {color:green;font-size:18px;margin:10px 0;}
+    button {
+      background:#ff6600;color:#fff;border:none;
+      padding:10px;border-radius:5px;cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>My Online Store</header>
+
+<div class="container">
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200">
+    <h3>Cool Product</h3>
+    <p class="price">₹499</p>
+    <button onclick="order('Cool Product')">Order</button>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200">
+    <h3>Nice Product</h3>
+    <p class="price">₹799</p>
+    <button onclick="order('Nice Product')">Order</button>
+  </div>
+
+</div>
+
+<script>
+function order(product){
+  window.open("https://wa.me/91YOURNUMBER?text=I want to order " + product);
+}
+</script>
+
+</body>
+</html>
