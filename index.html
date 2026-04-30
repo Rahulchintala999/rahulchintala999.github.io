@@ -17,28 +17,44 @@ header {
   color: white;
   padding: 15px;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  gap: 15px;
+  padding: 15px;
 }
 
+/* CARD */
 .card {
   background: white;
-  padding: 15px;
+  padding: 12px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.card img {
+/* IMAGE SLIDER */
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.slider img {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 4/5; /* 1080:1350 ratio */
   object-fit: cover;
   border-radius: 8px;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+/* Hide scrollbar (mobile look) */
+.slider::-webkit-scrollbar {
+  display: none;
 }
 
 .price {
@@ -79,14 +95,21 @@ const products = [
   {
     name: "T-Shirt",
     price: "₹500",
-    img: "mich.123.jpeg",
+    images: [
+      "mich.123.jpeg",
+      "mich2.jpeg",
+      "mich3.jpeg"
+    ],
     features: ["100% Cotton", "Comfort Fit", "Best Quality"],
     link: "https://your-affiliate-link.com"
   },
   {
     name: "Shoes",
     price: "₹1500",
-    img: "https://via.placeholder.com/200",
+    images: [
+      "https://via.placeholder.com/400x500",
+      "https://via.placeholder.com/400x500"
+    ],
     features: ["Running Shoes", "Lightweight", "Durable"],
     link: "https://your-affiliate-link.com"
   }
@@ -99,10 +122,14 @@ function displayProducts() {
   products.forEach(p => {
     list.innerHTML += `
       <div class="card">
-        <img src="${p.img}">
+
+        <div class="slider">
+          ${p.images.map(img => `<img src="${img}">`).join("")}
+        </div>
+
         <h3>${p.name}</h3>
         <p class="price">${p.price}</p>
-        
+
         <ul class="features">
           ${p.features.map(f => `<li>${f}</li>`).join("")}
         </ul>
@@ -110,6 +137,7 @@ function displayProducts() {
         <button onclick="buyNow('${p.link}')">
           Get This Product
         </button>
+
       </div>
     `;
   });
