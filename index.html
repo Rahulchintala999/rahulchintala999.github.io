@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Store</title>
+<title>My Product Showcase</title>
 
 <style>
 body {
@@ -22,7 +22,7 @@ header {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
 }
@@ -31,99 +31,92 @@ header {
   background: white;
   padding: 15px;
   border-radius: 10px;
-  text-align: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .card img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.price {
+  color: green;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.features {
+  font-size: 14px;
+  margin: 10px 0;
 }
 
 button {
   background: #ff9900;
   border: none;
   padding: 10px;
-  margin-top: 10px;
   cursor: pointer;
   width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 button:hover {
   background: #e68a00;
-}
-
-.cart {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  width: 250px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 </style>
 </head>
 
 <body>
 
-<header>My Online Store</header>
+<header>Best Deals For You</header>
 
 <div class="products" id="productList"></div>
 
-<div class="cart">
-  <h3>Cart</h3>
-  <ul id="cartItems"></ul>
-  <p><b>Total: ₹<span id="total">0</span></b></p>
-</div>
-
 <script>
 const products = [
-  {name:"T-Shirt", price:500, img:"https://via.placeholder.com/200"},
-  {name:"Shoes", price:1500, img:"https://via.placeholder.com/200"},
-  {name:"Watch", price:2000, img:"https://via.placeholder.com/200"},
-  {name:"Headphones", price:1200, img:"https://via.placeholder.com/200"}
+  {
+    name: "T-Shirt",
+    price: "₹500",
+    img: "mich.123.jpeg",
+    features: ["100% Cotton", "Comfort Fit", "Best Quality"],
+    link: "https://your-affiliate-link.com"
+  },
+  {
+    name: "Shoes",
+    price: "₹1500",
+    img: "https://via.placeholder.com/200",
+    features: ["Running Shoes", "Lightweight", "Durable"],
+    link: "https://your-affiliate-link.com"
+  }
 ];
-
-let cart = [];
 
 function displayProducts() {
   const list = document.getElementById("productList");
   list.innerHTML = "";
 
-  products.forEach((p, index) => {
+  products.forEach(p => {
     list.innerHTML += `
       <div class="card">
         <img src="${p.img}">
-        <h4>${p.name}</h4>
-        <p>₹${p.price}</p>
-        <button onclick="addToCart(${index})">Add to Cart</button>
+        <h3>${p.name}</h3>
+        <p class="price">${p.price}</p>
+        
+        <ul class="features">
+          ${p.features.map(f => `<li>${f}</li>`).join("")}
+        </ul>
+
+        <button onclick="buyNow('${p.link}')">
+          Get This Product
+        </button>
       </div>
     `;
   });
 }
 
-function addToCart(index) {
-  cart.push(products[index]);
-  updateCart();
-}
-
-function updateCart() {
-  const cartList = document.getElementById("cartItems");
-  const total = document.getElementById("total");
-
-  cartList.innerHTML = "";
-  let sum = 0;
-
-  cart.forEach(item => {
-    cartList.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
-    sum += item.price;
-  });
-
-  total.innerText = sum;
+function buyNow(link) {
+  window.open(link, "_blank");
 }
 
 displayProducts();
