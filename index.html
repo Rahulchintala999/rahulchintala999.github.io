@@ -6,87 +6,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f1f3f6;
-}
+body {margin:0;font-family:Arial;background:#f1f3f6;}
 
-/* Header */
 .header {
-  background:#2874f0;
-  color:#fff;
-  padding:10px;
-  display:flex;
-  align-items:center;
+  background:#2874f0;color:#fff;
+  padding:10px;display:flex;
   justify-content:space-between;
 }
 
-.logo {
-  font-size:20px;
-  font-weight:bold;
-}
+.logo {font-size:20px;font-weight:bold;}
+.search {width:50%;padding:8px;border:none;border-radius:4px;}
 
-.search {
-  width:50%;
-  padding:8px;
-  border:none;
-  border-radius:4px;
-}
-
-/* Banner */
-.banner {
-  background:#fff;
-  padding:10px;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* Products */
 .container {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  padding:15px;
+  gap:15px;padding:15px;
 }
 
 .card {
-  background:#fff;
-  border-radius:8px;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  background:#fff;border-radius:8px;
+  padding:10px;text-align:center;
 }
 
 .card img {
   width:100%;
   height:150px;
   object-fit:cover;
-  border-radius:5px;
 }
 
-.title {
-  font-size:14px;
-  margin:8px 0;
-}
-
-.price {
-  color:green;
-  font-weight:bold;
-}
+.price {color:green;font-weight:bold;}
 
 button {
-  margin-top:8px;
-  background:#fb641b;
-  color:#fff;
-  border:none;
-  padding:8px;
-  border-radius:4px;
-  cursor:pointer;
-}
-
-button:hover {
-  background:#d95300;
+  background:#fb641b;color:#fff;
+  border:none;padding:8px;
+  border-radius:4px;cursor:pointer;
 }
 </style>
 </head>
@@ -94,40 +47,31 @@ button:hover {
 <body>
 
 <div class="header">
-  <div class="logo">GetGadgets</div>
-  <input class="search" placeholder="Search for products...">
+  <div class="logo">MyShop</div>
+  <input class="search" placeholder="Search...">
 </div>
-
-<div class="banner">🔥 Best Deals Today 🔥</div>
 
 <div class="container">
 
   <div class="card">
-    <img src="<img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg">">
-    <div class="title">Wireless Earbuds</div>
+    <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg">
+    <h4>Wireless Earbuds</h4>
     <div class="price">₹999</div>
-    <button onclick="order('Wireless Earbuds')">Buy Now</button>
+    <button onclick="buyNow('https://amzn.to/yourlink')">Buy Now</button>
   </div>
 
   <div class="card">
-    <img src="<img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg">">
-    <div class="title">Stylish T-Shirt</div>
+    <img src="https://m.media-amazon.com/images/I/71-3HjGNDUL._SX679_.jpg">
+    <h4>T-Shirt</h4>
     <div class="price">₹499</div>
-    <button onclick="order('T-Shirt')">Buy Now</button>
-  </div>
-
-  <div class="card">
-    <img src="<img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg">">
-    <div class="title">Smart Watch</div>
-    <div class="price">₹1499</div>
-    <button onclick="order('Smart Watch')">Buy Now</button>
+    <button onclick="buyNow('https://yourstorelink.com')">Buy Now</button>
   </div>
 
 </div>
 
 <script>
-function order(product){
-  window.open("https://wa.me/919392312373?text=Hi, I want to buy " + product);
+function buyNow(link){
+  window.open(link, "_blank");
 }
 </script>
 
