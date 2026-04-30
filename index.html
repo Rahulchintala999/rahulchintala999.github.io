@@ -2,128 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Store</title>
 
 <style>
 body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f1f3f6;
+  font-family: Arial;
+  margin: 0;
+  background: #f5f5f5;
 }
 
-/* Header */
-.header {
-  background:#2874f0;
-  color:#fff;
-  padding:10px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+header {
+  background: #232f3e;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
 }
 
-.logo {
-  font-size:20px;
-  font-weight:bold;
-}
-
-.search {
-  width:50%;
-  padding:8px;
-  border:none;
-  border-radius:4px;
-}
-
-/* Banner */
-.banner {
-  background:#fff;
-  padding:10px;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* Products */
-.container {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  padding:15px;
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .card {
-  background:#fff;
-  border-radius:8px;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .card img {
-  width:100%;
-  height:150px;
-  object-fit:cover;
-  border-radius:5px;
-}
-
-.title {
-  font-size:14px;
-  margin:8px 0;
-}
-
-.price {
-  color:green;
-  font-weight:bold;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 button {
-  margin-top:8px;
-  background:#fb641b;
-  color:#fff;
-  border:none;
-  padding:8px;
-  border-radius:4px;
-  cursor:pointer;
+  background: #ff9900;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 100%;
 }
 
 button:hover {
-  background:#d95300;
+  background: #e68a00;
+}
+
+.cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <div class="logo">MyShop</div>
-  <input class="search" placeholder="Search for products...">
-</div>
+<header>My Online Store</header>
 
-<div class="banner">🔥 Best Deals Today 🔥</div>
+<div class="products" id="productList"></div>
 
-<div class="container">
-
-  <!-- PRODUCT 1 -->
-  <div class="card">
-    <img src="mich.123.jpeg">
-    <div class="title">My Product</div>
-    <div class="price">₹499</div>
-    <button onclick="buyNow('https://yourproductlink.com')">Buy Now</button>
-  </div>
-
-  <!-- PRODUCT 2 -->
-  <div class="card">
-    <img src="mich.123.jpeg">
-    <div class="title">Another Product</div>
-    <div class="price">₹799</div>
-    <button onclick="buyNow('https://yourproductlink.com')">Buy Now</button>
-  </div>
-
+<div class="cart">
+  <h3>Cart</h3>
+  <ul id="cartItems"></ul>
+  <p><b>Total: ₹<span id="total">0</span></b></p>
 </div>
 
 <script>
-function buyNow(link){
-  window.open(link, "_blank");
+const products = [
+  {name:"T-Shirt", price:500, img:"https://via.placeholder.com/200"},
+  {name:"Shoes", price:1500, img:"https://via.placeholder.com/200"},
+  {name:"Watch", price:2000, img:"https://via.placeholder.com/200"},
+  {name:"Headphones", price:1200, img:"https://via.placeholder.com/200"}
+];
+
+let cart = [];
+
+function displayProducts() {
+  const list = document.getElementById("productList");
+  list.innerHTML = "";
+
+  products.forEach((p, index) => {
+    list.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <h4>${p.name}</h4>
+        <p>₹${p.price}</p>
+        <button onclick="addToCart(${index})">Add to Cart</button>
+      </div>
+    `;
+  });
 }
+
+function addToCart(index) {
+  cart.push(products[index]);
+  updateCart();
+}
+
+function updateCart() {
+  const cartList = document.getElementById("cartItems");
+  const total = document.getElementById("total");
+
+  cartList.innerHTML = "";
+  let sum = 0;
+
+  cart.forEach(item => {
+    cartList.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
+    sum += item.price;
+  });
+
+  total.innerText = sum;
+}
+
+displayProducts();
 </script>
 
 </body>
